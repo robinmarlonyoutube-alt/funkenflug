@@ -1,0 +1,49 @@
+FUNKENFLUG 4.0 – ONLINE-KONTO & CLOUD-SPIELSTAND
+================================================
+
+WAS DIESE VERSION KANN
+- Registrierung und Login mit E-Mail + Passwort (Firebase Authentication)
+- Passwort-zurücksetzen per E-Mail
+- automatische Anmeldung auf demselben Gerät
+- Spielstand wird unter der persönlichen Firebase-UID gespeichert
+- beim Anmelden wird der Cloud-Spielstand auf das Gerät geladen
+- lokaler Spielstand wird beim ersten Login in die Cloud übertragen
+- Spielstände können auf anderen Geräten mit demselben Konto geladen werden
+
+WICHTIG
+Die echte Online-Funktion ist vorbereitet, aber erst aktiv, wenn DU ein Firebase-Projekt
+anlegst und die Konfiguration einträgst. Es gibt absichtlich keine erfundenen Zugangsdaten.
+
+EINRICHTUNG
+1. Öffne https://console.firebase.google.com/ und erstelle ein Projekt (z. B. Funkenflug).
+2. Füge dem Projekt eine Web-App hinzu (</> Symbol). Kopiere die Firebase-Konfiguration.
+3. Öffne firebase-config.js und ersetze alle Beispielwerte durch die Werte deiner Web-App.
+   Die databaseURL muss exakt aus deiner Firebase-Konsole übernommen werden.
+4. In Firebase Authentication > Sign-in method: aktiviere "E-Mail/Passwort".
+5. In Realtime Database: Erstelle eine Datenbank (Region möglichst europe-west).
+6. Öffne den Reiter Rules und füge den Inhalt von firebase-database-rules.json ein.
+7. Veröffentliche das Spiel über eine HTTPS-Webseite (z. B. GitHub Pages oder Netlify).
+   Lade Funkenflug_Online_4.0_Ultimate.html und firebase-config.js in denselben Ordner.
+   Die Datei allein per file:// zu öffnen reicht für Firebase-Login nicht zuverlässig aus.
+8. Ergänze in Firebase Authentication > Settings > Authorized domains die Domain deiner Webseite.
+9. Öffne die Webseite, wähle Konto & Online spielen und registriere dich.
+10. Melde dich auf einem zweiten Gerät mit denselben Daten an. Der Cloud-Spielstand
+    wird dort geladen.
+
+DATEIEN
+- Funkenflug_Online_4.0_Ultimate.html : das Spiel
+- firebase-config.js              : deine Firebase-Web-Konfiguration (ausfüllen!)
+- firebase-database-rules.json     : Datenbankregeln
+
+SICHERHEITSHINWEIS ZU ONLINE-RÄUMEN
+Die beigefügten Regeln schützen private Benutzerprofile und Spielstände per UID.
+Der vorhandene 1v1-Raumcode nutzt für die Raumkommunikation vorläufig eine Regel,
+die angemeldeten Nutzern Raumzugriff erlaubt. Das ist für einen privaten Test gedacht,
+nicht für einen öffentlichen kompetitiven Betrieb. Vor einer öffentlichen Veröffentlichung
+sollten Raumzugriffe serverseitig (z. B. mit Cloud Functions) abgesichert werden.
+
+NINTENDO SWITCH
+Der Cloud-Spielstand funktioniert auf Geräten/Browsern, auf denen die gehostete Webseite
+und Firebase unterstützt werden. Die Nintendo Switch bietet keinen allgemein verfügbaren,
+normalen Webbrowser wie PC oder Smartphone; deshalb kann ich Switch-Kompatibilität nicht
+versprechen. Ein Konto synchronisiert nicht automatisch lokale Spielstände anderer Apps.
